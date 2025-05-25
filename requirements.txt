@@ -5,3 +5,5 @@ flask_cors
 pandas
 openpyxl
 python-dotenv
+flask_jwt_extended
+
