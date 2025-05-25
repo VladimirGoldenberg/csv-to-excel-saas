@@ -29,8 +29,8 @@ def create_app():
     @app.before_request
     def log_request_info():
         log_entry = f"[{request.remote_addr}] {request.path}\n"
-        with open("log.txt", "a", encoding="utf-8") as f:
-            f.write(log_entry)
+        print(log_entry)
+
 
     app.register_blueprint(routes)
     return app
