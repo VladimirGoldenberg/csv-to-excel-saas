@@ -13,3 +13,4 @@ and access the result after subscribing via Stripe.
 1. Copy `.env.example` to `.env` and fill in your keys.
 2. Run `pip install -r requirements.txt`
 3. Launch with `python run.py`
+
