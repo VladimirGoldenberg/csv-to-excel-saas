@@ -7,6 +7,7 @@ import stripe
 from datetime import datetime
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import unset_jwt_cookies
 
 from flask import jsonify
 import os
@@ -76,9 +77,11 @@ def dashboard():
     user = User.query.filter_by(email=session['email']).first()
     return render_template('dashboard.html', user=user, username=user.username)
 
-@routes.route('/logout')
+@routes.route('/logout', methods=['POST'])
+@jwt_required()
 def logout():
-    session.clear()
+    response = jsonify({"msg": "Logout successful"})
+    unset_jwt_cookies(response)
     return redirect(url_for('routes.login'))
 
 @routes.route('/upload', methods=['GET', 'POST'])
