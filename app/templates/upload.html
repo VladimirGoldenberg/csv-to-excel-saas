@@ -1,0 +1,45 @@
+<!-- upload.html -->
+{% extends "base.html" %}
+{% block title %}Upload CSV File{% endblock %}
+{% block content %}
+<div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+    <h2 class="mb-3">Upload CSV File</h2>
+    <p class="mb-4">Convert your CSV files into clean and formatted Excel documents. Ideal for financial professionals, small businesses, and analysts.</p>
+
+    {% if download_link %}
+        <div class="alert alert-success">
+            ✅ Conversion successful! <a href="{{ download_link }}" class="alert-link">Download Excel file</a>
+        </div>
+    {% elif request.method == 'POST' %}
+        <div class="alert alert-warning">
+            ⚠️ No file was uploaded or file was not valid CSV.
+        </div>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="csv_file" class="form-label">Select your CSV file:</label>
+            <input class="form-control" type="file" name="csv_file" id="csv_file">
+            <small id="file-label" class="form-text text-muted">No file chosen</small>
+        </div>
+        <button type="submit" class="btn btn-success w-100"><i class="fas fa-file-excel"></i> Convert</button>
+    </form>
+
+    <a href="{{ url_for('routes.dashboard') }}" class="btn btn-outline-secondary w-100 mt-3"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const fileInput = document.querySelector('input[type="file"]');
+        const label = document.getElementById('file-label');
+        fileInput.value = '';
+        fileInput.addEventListener('change', function () {
+            if (this.files.length > 0) {
+                label.innerText = `Selected: ${this.files[0].name}`;
+            } else {
+                label.innerText = 'No file chosen';
+            }
+        });
+    });
+</script>
+{% endblock %}
