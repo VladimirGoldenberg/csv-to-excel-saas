@@ -8,7 +8,7 @@ from datetime import datetime
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import unset_jwt_cookies
-
+from flask import send_from_directory
 from flask import jsonify
 import os
 
@@ -226,3 +226,7 @@ def paypal_confirm():
         return jsonify({'status': 'subscribed'})
     else:
         return jsonify({'status': 'user not found'}), 404
+
+@routes.route('/google5ccd5e2f106b6501.html')
+def google_verification():
+    return send_from_directory('static/verification', 'google5ccd5e2f106b6501.html')

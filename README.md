@@ -1,16 +1,38 @@
-# CSV to Excel SaaS
-This SaaS project allows users to upload CSV files, automatically convert them into Excel format,
-and access the result after subscribing via Stripe.
+# CSV to Excel SaaS Converter
 
-## Features
-- Stripe subscription integration
-- User registration/login
-- Protected dashboard
-- CSV to Excel conversion
-- Environment-based configuration
+**Convert your bank statements from CSV to Excel in seconds.**  
+This SaaS web application helps users transform raw CSV files into clean and structured Excel reports — perfect for accounting, financial planning, or business analysis.
 
-## Setup Instructions
-1. Copy `.env.example` to `.env` and fill in your keys.
-2. Run `pip install -r requirements.txt`
-3. Launch with `python run.py`
+---
+
+## ✅ Features
+
+- 🟢 One free conversion for all users
+- 📤 Upload your bank CSV file securely
+- 📊 Instant conversion to downloadable Excel (.xlsx)
+- 🔒 Simple PayPal payment system to unlock unlimited access
+- 🖥️ Fully responsive: works on desktop and mobile
+- 👤 User registration, login, and password change functionality
+
+---
+
+## 🚀 Live Demo
+
+Try it now at: [https://csv-to-excel-saas.onrender.com](https://csv-to-excel-saas.onrender.com)
+
+_New users receive a free conversion — no credit card required!_
+
+---
+
+## 🔧 Tech Stack
+
+- Python + Flask
+- HTML, CSS, Bootstrap
+- JavaScript
+- SQLite
+- PayPal Integration (Sandbox + Live ready)
+
+---
+
+## 📂 Folder Structure
 
