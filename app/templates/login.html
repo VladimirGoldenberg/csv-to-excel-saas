@@ -1,22 +1,28 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-<h1>Login</h1>
-<p>Please log in to your account to start converting your CSV files into Excel.</p>
+<div class="card shadow p-4 mx-auto mt-5" style="max-width: 400px;">
+    <h2 class="mb-3 text-center">Login</h2>
+    <p class="text-muted text-center">Log in to start converting CSV files.</p>
 
-{% if error %}
-    <div style="color: red;">{{ error }}</div>
-{% endif %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
 
-<form method="POST">
-    <label for="email"><strong>Email:</strong></label>
-    <input type="email" id="email" name="email" required><br><br>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="email" class="form-label"><strong>Email:</strong></label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
 
-    <label for="password"><strong>Password:</strong></label>
-    <input type="password" id="password" name="password" required><br><br>
+        <div class="mb-3">
+            <label for="password" class="form-label"><strong>Password:</strong></label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
 
-    <button type="submit">Login</button>
-</form>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
 
-<p>Don't have an account? <a href="/register">Register here</a></p>
+    <p class="mt-3 text-center">Don't have an account? <a href="/register">Register here</a></p>
+</div>
 {% endblock %}

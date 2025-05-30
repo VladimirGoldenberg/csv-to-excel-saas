@@ -5,15 +5,59 @@
 <h1 class="mb-4">Welcome, {{ user.username }}!</h1>
 <p>This is your dashboard.</p>
 <p><strong>Subscription Status:</strong></p>
+
 {% if subscribed %}
     <p class="text-success">✅ You have an active subscription.</p>
 {% else %}
     <p class="text-danger">❌ You do not have an active subscription.</p>
+
+    <!-- Stripe кнопка -->
     <a href="{{ url_for('routes.subscribe') }}" class="btn btn-warning mt-2">
         💳 Subscribe to Unlock Full Access
     </a>
+
+    <!-- PayPal SDK и кнопка -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AWpRSqyGeZgSczOTxMl0MRk9cggab8BjlNeKOuXgNI_NhSCBa1rYGPVsKvXTP8BrZupwNwjlV7Wt_KT3"></script>
+
+    <div id="paypal-button-container" class="mt-4"></div>
+
+    <script>
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: '5.00'
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            // Шлём email на сервер, чтобы активировать подписку
+            fetch("/paypal/confirm", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ email: "{{ user.email }}" })
+            }).then(() => {
+              alert('✅ Оплата завершена: ' + details.payer.name.given_name);
+              window.location.href = "/payment/success";
+            });
+          });
+        },
+        onCancel: function(data) {
+          window.location.href = "/payment/cancel";
+        }
+      }).render('#paypal-button-container');
+    </script>
 {% endif %}
+
+<!-- Кнопка перехода к конвертеру -->
 <a href="/upload" class="btn btn-primary me-2"><i class="fas fa-file-csv"></i> Go to CSV Converter</a>
+
+<!-- Кнопка выхода -->
 <form method="POST" action="{{ url_for('routes.logout') }}" style="display:inline-block;">
   <button type="submit" class="btn btn-outline-danger">
     <i class="fas fa-sign-out-alt"></i> Logout

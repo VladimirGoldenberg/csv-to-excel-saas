@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Payment Cancelled{% endblock %}
+{% block content %}
+  <div class="alert alert-warning mt-5 text-center">
+    <h3>⚠️ Payment was cancelled</h3>
+    <p>You did not complete the transaction.</p>
+    <a href="{{ url_for('routes.dashboard') }}" class="btn btn-outline-secondary mt-3">Return to Dashboard</a>
+  </div>
+{% endblock %}

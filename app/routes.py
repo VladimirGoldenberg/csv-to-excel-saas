@@ -75,7 +75,7 @@ def dashboard():
         return redirect(url_for('routes.login'))
 
     user = User.query.filter_by(email=session['email']).first()
-    return render_template('dashboard.html', user=user, username=user.username)
+    return render_template('dashboard.html', user=user, username=user.username, subscribed=user.is_subscribed)
 
 @routes.route('/logout', methods=['POST'])
 @jwt_required()
@@ -203,3 +203,26 @@ def stripe_webhook():
             print("❌ Email клиента не найден")
 
     return jsonify(success=True), 200
+@routes.route("/payment/success")
+def payment_success():
+    return render_template("payment_success.html")
+
+@routes.route("/payment/cancel")
+def payment_cancel():
+    return render_template("payment_cancel.html")
+@routes.route('/paypal/confirm', methods=['POST'])
+def paypal_confirm():
+    data = request.get_json()
+    email = data.get('email')
+
+    if not email:
+        return jsonify({'status': 'missing email'}), 400
+
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+        user.is_subscribed = True
+        db.session.commit()
+        return jsonify({'status': 'subscribed'})
+    else:
+        return jsonify({'status': 'user not found'}), 404
