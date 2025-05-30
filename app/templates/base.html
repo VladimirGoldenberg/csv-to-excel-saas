@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert CSV files to Excel online with one click. Try your first conversion for free. Secure payments via PayPal. Fast, reliable, and mobile-friendly SaaS platform.">
     <title>{% block title %}SaaS Converter{% endblock %}</title>
-    
+
     <!-- Bootstrap and Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
     <div class="container py-4">
         {% block content %}{% endblock %}
