@@ -107,6 +107,10 @@ def upload():
             if file.filename.endswith('.csv'):
                 try:
                     df = pd.read_csv(file)
+
+                    # 🧹 Удаление полностью пустых колонок
+                    df.dropna(axis=1, how='all', inplace=True)
+
                     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
                     filename = f"converted_{timestamp}.xlsx"
 
